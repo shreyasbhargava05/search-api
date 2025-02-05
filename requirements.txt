@@ -1,0 +1,4 @@
+sentence_transformers
+numpy
+psycopg2
+fastapi
