@@ -46,20 +46,21 @@ This API provides a hybrid search mechanism for a magazine database containing 1
 📚 Table 1: Magazine Information
 Stores general magazine details.
 
-|Column Name | Type |	Description |
--------------------------------------
-|id	INT (PK) |	Unique |  magazine identifier |
-|title	| TEXT	| Title of the magazine |
-|author	| TEXT |	Author of the magazine|
-|publication_date|	DATE |	Date of publication|
-|category|	TEXT |	Category of the magazine |
+
+| Column Name     | Type   | Description          |
+|-----------------|--------|----------------------|
+| id	INT (PK)  |	Unique | magazine identifier   |
+| title	          | TEXT   | Title of the magazine |
+| author	      | TEXT   | Author of the magazine|
+| publication_date|	DATE   | Date of publication   |
+| category        |	TEXT   | Category of the magazine |
 
 
 📝 Table 2: Magazine Content
 Stores magazine content along with vector embeddings for semantic search.
 
 |Column Name |	Type |	Description |
---------------------------------------
+|------------|-------|---------------|
 | id	INT (PK) |	Unique | content identifier |
 | magazine_id	INT (FK) |	Reference to Magazine Information |
 | content |	TEXT	|Full text content of the magazine |
