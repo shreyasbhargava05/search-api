@@ -47,6 +47,7 @@ This API provides a hybrid search mechanism for a magazine database containing 1
 Stores general magazine details.
 
 |Column Name | Type |	Description |
+-------------------------------------
 |id	INT (PK) |	Unique |  magazine identifier |
 |title	| TEXT	| Title of the magazine |
 |author	| TEXT |	Author of the magazine|
@@ -58,6 +59,7 @@ Stores general magazine details.
 Stores magazine content along with vector embeddings for semantic search.
 
 |Column Name |	Type |	Description |
+--------------------------------------
 | id	INT (PK) |	Unique | content identifier |
 | magazine_id	INT (FK) |	Reference to Magazine Information |
 | content |	TEXT	|Full text content of the magazine |
