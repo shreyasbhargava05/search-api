@@ -11,8 +11,18 @@ Random data is generated and inserted in both the tables via insert script, maga
 
 ## Below are the steps to set up the application :
 
-1. 
+Execute below SQL file in chronological order:
+1. Create-magazine.sql
+2. Create-magazine_contents.sql
+3. data-magazine_content.sql
+4. data-magazine.sql
+5. create-magazine_search_view.sql
 
+# Install dependencies
+pip install -r requirements.txt  
+
+# Start the API
+uvicorn app:main --reload  # For FastAPI
 
 # Project Overview
 This API provides a hybrid search mechanism for a magazine database containing 1 million records. It efficiently combines traditional keyword-based search with vector similarity search, ensuring highly relevant search results.
@@ -64,11 +74,7 @@ Requires PGVector or another vector search solution in PostgreSQL.
 3️⃣ Hybrid Search
 Combines both keyword and vector search results.
 
-# Install dependencies
-pip install -r requirements.txt  # Python (FastAPI)
 
-# Start the API
-uvicorn app:main --reload  # For FastAPI
 
 Contact
 📩 Email: shreyasbhargavauk@gmail.com
