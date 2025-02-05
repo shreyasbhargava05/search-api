@@ -9,12 +9,6 @@ Random data is generated and inserted in both the tables via insert script, maga
 
 
 
-## API Endpoints
-| Method | Endpoint        | Description          |
-|--------|-----------------|----------------------|
-| GET    | `/api/search`   | Fetch Data by string |
-| POST   | `/api/Update`   | Create embadding of content column|  
-
 ## Below are the steps to set up the application :
 
 1. 
