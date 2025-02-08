@@ -11,7 +11,6 @@ AS
     m.publication_date,
     m.category,
     mc.content,
-    mc.vector_representation,
     to_tsvector('english'::regconfig, (((((m.title || ' '::text) || m.author) || ' '::text) || m.category) || ' '::text) || mc.content) AS text_col
    FROM magazines m
      JOIN magazine_contents mc ON m.id = mc.magazine_id

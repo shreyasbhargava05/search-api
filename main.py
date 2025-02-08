@@ -25,7 +25,6 @@ def get_db():
 @app.post("/search")
 async def search(
     query: str,
-    queryType: int = 1,
     limit: int = 10,
     db: psycopg2.extensions.connection = Depends(get_db)
 ):
@@ -41,7 +40,6 @@ async def search(
             WHERE text_col @@ phraseto_tsquery('english', '{query}')
             order by ts_rank(text_col, phraseto_tsquery('english', '{query}') )  LIMIT {limit}
         """
-        print(keyword_sql)
         cursor.execute(keyword_sql)
         keyword_results = {row[0]: row for row in cursor.fetchall()} # Store results in a dictionary for faster lookup
 
@@ -50,16 +48,13 @@ async def search(
         vector = model.encode(query)
         embadding = vector.tolist()
         vector_sql = f"""
-            SELECT magazines.id, magazines.title, magazines.author, magazines.category,
-            magazine_contents.content
-            FROM magazines
-            INNER JOIN magazine_contents ON magazines.id = magazine_contents.magazine_id
-            ORDER BY magazine_contents.vector_representation <-> '{embadding}' LIMIT {limit}
+            SELECT mv.id, mv.title, mv.author, mv.category, mv.content
+            FROM magazine_search_view mv           
+            ORDER BY mv.vector_representation <-> '{embadding}' LIMIT {limit}
         """
         cursor.execute(vector_sql)
         vector_results = {row[0]: row for row in cursor.fetchall()} # Store results in a dictionary
-        print("keyword_results",keyword_results)
-        print("vector_results",vector_results)
+        
         # Hybrid Search: Hybrid Search: Combine the results of both keyword and vector searches to return the most relevant results
         combined_results = {}
         for id, keyword_row in keyword_results.items():
@@ -118,6 +113,7 @@ async def update_vectors(db: psycopg2.extensions.connection = Depends(get_db)):
 
         if vectors_to_update:
             sql = "UPDATE magazine_contents SET vector_representation = %s WHERE id = %s" # SQL query
+            sql = sql + "  REFRESH MATERIALIZED VIEW CONCURRENTLY my_materialized_view;"
             execute_batch(cursor, sql, vectors_to_update) # Use execute_batch
             db.commit()
             return {"message": f"Vectors updated for {len(vectors_to_update)} records."}

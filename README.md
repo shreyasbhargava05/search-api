@@ -1,82 +1,60 @@
+# Pre Requisites
+1. Download and install Postgres version 16: https://www.postgresql.org/download/
+2. Download and install PGVector in Postgres DB, https://github.com/pgvector/pgvector
+3. Python version 3.12.8
+
 # Serach APIs
 
 This project is implemented API with two endpoint to perform a hybrid search in a table of 1 million records, 
-• Table 1: Magazine Information
-    o Fields: id, title, author, publication_date, category, etc.
-• Table 2: Magazine Content
-    o Fields: id, magazine_id (foreign key to Magazine Information), content, vector_representation, etc.
-Random data is generated and inserted in both the tables via insert script, magazine.sql and magazine_content.sql
+
+# Follow below steps to set up the project:
+
+## Step 1: Create below tables 
+
+### Magazine Information (execute [text](Create-magazine.sql) in postgres)
+    o Fields: id, title, author, publication_date, category.
+
+    | id | title        | author          | publication_date | category|
+    |----|--------------|-----------------|------------------|---------|
 
 
+### Magazine Content (execute [text](Create-magazine_content.sql))
+    o Fields: id, magazine_id (foreign key to Magazine Information), content, vector_representation.
 
-## Below are the steps to set up the application :
+    | id | magazine_id        | content          | vector_representation |
+    |----|--------------------|------------------|-----------------------|
 
-Execute below SQL file in chronological order:
-1. Create-magazine.sql
-2. Create-magazine_contents.sql
-3. data-magazine_content.sql
-4. data-magazine.sql
-5. create-magazine_search_view.sql
+## Step 2: Generate data into tables 
+Random data is generated and inserted in both the tables by executing insert query in data-magazine.sql and data-magazine_content.sql files.
 
-# Install dependencies
-pip install -r requirements.txt  
+## Step3: Create Materialize View (execute [text](create-magazine_search_view.sql) in postgres)
 
-# Start the API
-uvicorn app:main --reload  # For FastAPI
+## Step4: Install Python dependencies
+pip install -r requirements.txt  # Python (FastAPI)
 
-# Project Overview
-This API provides a hybrid search mechanism for a magazine database containing 1 million records. It efficiently combines traditional keyword-based search with vector similarity search, ensuring highly relevant search results.
+## Step 5: Start the API server
+uvicorn app:main --reload  # For FastAPI    
 
-## Features
-✅ Hybrid Search: Combines keyword and vector-based search for enhanced accuracy.
-✅ Scalability: Optimized to handle 1 million records efficiently.
-✅ Full-Text Search: Enables fast searches in magazine titles, authors, and content.
-✅ Vector Search: Uses embeddings to find semantically similar content.
-✅ Indexing & Performance: Utilizes indexing techniques for fast retrieval.
+## step 6: Open below url on browser for API doc
+http://localhost:8000/docs
 
-## API Endpoints
+
+### API Endpoints
 | Method | Endpoint        | Description          |
 |--------|-----------------|----------------------|
 | GET    | `/api/search`   | Fetch Data by string |
-| POST   | `/api/Update`   | Create embadding of content column|
+| POST   | `/api/Update`   | Create embadding of content column|  
 
 
+## Step 7: Execute Update API
+By running this API, all embadding of content field in magazine_content table will be generate using 'all-mpnet-base-v2' model
+and it wll also update 'magazine_search_view' material view
 
-## Database Schema
-📚 Table 1: Magazine Information
-Stores general magazine details.
+## Step 8: Execute Search API
+This API has 2 query param 'query'and 'limit', in query pass the string you want to search in data base, in limit pass the value of limit you want to see in result.
 
-
-| Column Name     | Type   | Description          |
-|-----------------|--------|----------------------|
-| id	INT (PK)  |	Unique | magazine identifier   |
-| title	          | TEXT   | Title of the magazine |
-| author	      | TEXT   | Author of the magazine|
-| publication_date|	DATE   | Date of publication   |
-| category        |	TEXT   | Category of the magazine |
-
-
-📝 Table 2: Magazine Content
-Stores magazine content along with vector embeddings for semantic search.
-
-|Column Name |	Type |	Description |
-|------------|-------|---------------|
-| id	INT (PK) |	Unique | content identifier |
-| magazine_id	INT (FK) |	Reference to Magazine Information |
-| content |	TEXT	|Full text content of the magazine |
-| vector_representation |	VECTOR| 	Embedding representation for search|
-
-
-## Search Functionality
-1️⃣ Keyword-Based Search
-Searches in title, author, and content fields.
-Uses PostgreSQL Full-Text Search (to_tsvector, phraseto_tsquery, ts_rank) for efficiency.
-2️⃣ Vector Search
-Uses vector similarity search to find semantically relevant content.
-Requires PGVector or another vector search solution in PostgreSQL.
-3️⃣ Hybrid Search
-Combines both keyword and vector search results.
-
+# Project Overview
+This API provides a hybrid search mechanism for a magazine database containing 1 million records. It efficiently combines traditional keyword-based search with vector similarity search, ensuring highly relevant search results.
 
 
 Contact
