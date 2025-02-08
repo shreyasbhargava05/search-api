@@ -41,11 +41,11 @@ http://localhost:8000/docs
 | POST   | `/api/Update`   | Create embadding of content column|  
 
 
-## Step 7: Execute Update API
+## Step 7: Execute/api/update API
 By running this API, all embadding of content field in magazine_content table will be generate using 'all-mpnet-base-v2' model
 and it wll also update 'magazine_search_view' material view
 
-## Step 8: Execute Search API
+## Step 8: Execute /api/search API
 This API has 2 query param 'query'and 'limit', in query pass the string you want to search in data base, in limit pass the value of limit you want to see in result.
 
 # Project Overview
