@@ -4,7 +4,7 @@
 
 CREATE TABLE IF NOT EXISTS public.magazine_contents
 (
-    id integer NOT NULL DEFAULT nextval('magazine_contents_id_seq'::regclass),
+    id integer NOT NULL,
     magazine_id integer,
     content text COLLATE pg_catalog."default",
     vector_representation vector(768),
