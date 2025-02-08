@@ -7,7 +7,7 @@
 
 This project is implemented API with two endpoint to perform a hybrid search in a table of 1 million records, 
 
-# Follow below steps to set up the project:
+# Below are the steps to set up the project:
 
 ## Step 1: Create below tables 
 
