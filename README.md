@@ -20,7 +20,7 @@ This project is implemented API with two endpoint to perform a hybrid search in 
     | id | magazine_id | content | vector_representation |
     
 ## Step 2: Generate data into tables 
-Random data is generated and inserted in both the tables by executing insert query in [Cdata-magazine.sql](data-magazine.sql) and [data-magazine_content.sql](data-magazine_content.sql) files.
+Random data is generated and inserted in both the tables by executing insert query in [data-magazine.sql](data-magazine.sql) and [data-magazine_content.sql](data-magazine_content.sql) files.
 
 ## Step3: Create Materialize View (execute [create-magazine_search_view.sql](create-magazine_search_view.sql) in postgres)
 
