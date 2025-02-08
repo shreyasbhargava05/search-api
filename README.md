@@ -12,28 +12,23 @@ This project is implemented API with two endpoint to perform a hybrid search in 
 ## Step 1: Create below tables 
 
 ### Magazine Information (execute [Create-magazine.sql](Create-magazine.sql) in postgres)
-    o Fields: id, title, author, publication_date, category.
-
-    | id | title        | author          | publication_date | category|
-    |----|--------------|-----------------|------------------|---------|
-
+    o Fields:
+    | id | title | author | publication_date | category|
 
 ### Magazine Content (execute [Create-magazine_content.sql](Create-magazine_content.sql))
-    o Fields: id, magazine_id (foreign key to Magazine Information), content, vector_representation.
-
-    | id | magazine_id        | content          | vector_representation |
-    |----|--------------------|------------------|-----------------------|
-
+    o Fields:
+    | id | magazine_id | content | vector_representation |
+    
 ## Step 2: Generate data into tables 
 Random data is generated and inserted in both the tables by executing insert query in data-magazine.sql and data-magazine_content.sql files.
 
 ## Step3: Create Materialize View (execute [create-magazine_search_view.sql](create-magazine_search_view.sql) in postgres)
 
 ## Step4: Install Python dependencies
-pip install -r requirements.txt  # Python (FastAPI)
+    pip install -r requirements.txt  # Python (FastAPI)
 
 ## Step 5: Start the API server
-uvicorn app:main --reload  # For FastAPI    
+    uvicorn app:main --reload  # For FastAPI    
 
 ## step 6: Open below url on browser for API doc
 http://localhost:8000/docs
