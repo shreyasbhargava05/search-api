@@ -112,8 +112,8 @@ async def update_vectors(db: psycopg2.extensions.connection = Depends(get_db)):
                 raise HTTPException(status_code=500, detail=f"Error encoding content for record ID {record_id}: {e}")
 
         if vectors_to_update:
-            sql = "UPDATE magazine_contents SET vector_representation = %s WHERE id = %s" # SQL query
-            sql = sql + "  REFRESH MATERIALIZED VIEW CONCURRENTLY my_materialized_view;"
+            sql = "UPDATE magazine_contents SET vector_representation = %s WHERE id = %s ;" # SQL query
+            sql = sql + "  REFRESH MATERIALIZED VIEW CONCURRENTLY magazine_search_view;"
             execute_batch(cursor, sql, vectors_to_update) # Use execute_batch
             db.commit()
             return {"message": f"Vectors updated for {len(vectors_to_update)} records."}
