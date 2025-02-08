@@ -1,10 +1,16 @@
+CREATE SEQUENCE IF NOT EXISTS magazines_id_seq
+START WITH 1
+INCREMENT BY 1
+OWNED BY public.magazines.id;
+
+
 -- Table: public.magazines
 
 -- DROP TABLE IF EXISTS public.magazines;
 
 CREATE TABLE IF NOT EXISTS public.magazines
 (
-    id integer NOT NULL DEFAULT nextval('magazines_id_seq'::regclass),
+    id integer,
     title text COLLATE pg_catalog."default" NOT NULL,
     author text COLLATE pg_catalog."default",
     category text COLLATE pg_catalog."default",
