@@ -10,7 +10,7 @@ OWNED BY public.magazines.id;
 
 CREATE TABLE IF NOT EXISTS public.magazines
 (
-    id integer,
+    id integer NOT NULL,
     title text COLLATE pg_catalog."default" NOT NULL,
     author text COLLATE pg_catalog."default",
     category text COLLATE pg_catalog."default",
