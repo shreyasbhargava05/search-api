@@ -20,6 +20,9 @@ WITH DATA;
 ALTER TABLE IF EXISTS public.magazine_search_view
     OWNER TO postgres;
 
+CREATE UNIQUE INDEX idx_magazine_search_view_id
+ON public.magazine_search_view(text_col);
+
 
 CREATE INDEX magazine_search_view_idx
     ON public.magazine_search_view USING btree
