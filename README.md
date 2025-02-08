@@ -15,7 +15,7 @@ This project is implemented API with two endpoint to perform a hybrid search in 
     o Fields:
     | id | title | author | publication_date | category|
 
-### Magazine Content (execute [Create-magazine_content.sql](Create-magazine_content.sql))
+### Magazine Content (execute [Create-magazine_contents.sql](Create-magazine_contents.sql))
     o Fields:
     | id | magazine_id | content | vector_representation |
     
