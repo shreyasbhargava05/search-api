@@ -20,8 +20,14 @@ WITH DATA;
 ALTER TABLE IF EXISTS public.magazine_search_view
     OWNER TO postgres;
 
-CREATE UNIQUE INDEX idx_magazine_search_view_id
-ON public.magazine_search_view(text_col);
+
+
+-- For vector search
+CREATE INDEX idx_vector_representation ON magazine_search_view USING hnsw (vector_representation vector_l2_ops);
+
+-- For full-text search
+CREATE INDEX idx_text_col ON magazine_search_view USING gin (text_col);
+
 
 
 CREATE INDEX magazine_search_view_idx
