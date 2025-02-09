@@ -23,6 +23,7 @@ This project is implemented API with two endpoint to perform a hybrid search in 
 Random data is generated and inserted in both the tables by executing insert query in [data-magazine.sql](data-magazine.sql) and [data-magazine_content.sql](data-magazine_content.sql) files.
 
 ## Step3: Create Materialize View (execute [create-magazine_search_view.sql](create-magazine_search_view.sql) in postgres)
+For fast serach hnsw index on vector_representation field and gin index on text_col is added for faster search
 
 ## Step4: Install Python dependencies
     pip install -r requirements.txt  # Python (FastAPI)
