@@ -29,8 +29,3 @@ CREATE INDEX idx_vector_representation ON magazine_search_view USING hnsw (vecto
 CREATE INDEX idx_text_col ON magazine_search_view USING gin (text_col);
 
 
-
-CREATE INDEX magazine_search_view_idx
-    ON public.magazine_search_view USING btree
-    (text_col)
-    TABLESPACE pg_default;
